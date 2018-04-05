@@ -37,8 +37,6 @@ let password: String = try! PwGen().withoutCharacter("!").withoutUppercase().gen
 ```swift
 let generator = PwGen().withoutSymbols()
 print(generator.getCharacters())
-
-let password: String = try! generator.generate()
 ```
 
 ## Installation
