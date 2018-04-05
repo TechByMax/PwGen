@@ -1,4 +1,4 @@
-class PwGen{
+public class PwGen{
     private struct RuntimeError: Error {
         let message: String
         
@@ -17,7 +17,7 @@ class PwGen{
     
     private var size: UInt8 = 12
     
-    init(){
+    public init(){
         self.characters = self.symbols + self.letters + self.numbers
     }
     
@@ -26,7 +26,7 @@ class PwGen{
         return Int(arc4random_uniform(UInt32(n)))
     }
     
-    func generate() throws -> String{
+    public func generate() throws -> String{
         var password: String = ""
         
         if self.characters.count == 0{
@@ -56,50 +56,50 @@ class PwGen{
         return password
     }
     
-    func ofSize(_ size : UInt8) -> PwGen{
+    public func ofSize(_ size : UInt8) -> PwGen{
         self.size = size
         return self
     }
     
-    func withoutNumbers() -> PwGen{
+    public func withoutNumbers() -> PwGen{
         for number in self.numbers{
             self.characters = self.characters.filter{$0 != number}
         }
         return self
     }
     
-    func withoutLetters() -> PwGen{
+    public func withoutLetters() -> PwGen{
         for letter in self.letters{
             self.characters = self.characters.filter{$0 != letter}
         }
         return self
     }
     
-    func withoutSymbols() -> PwGen{
+    public func withoutSymbols() -> PwGen{
         for symbol in self.symbols{
             self.characters = self.characters.filter{$0 != symbol}
         }
         return self
     }
     
-    func withoutUppercase() -> PwGen{
+    public func withoutUppercase() -> PwGen{
         self.useUppercase = false
         return self
     }
     
-    func withoutCharacter(_ character : String) -> PwGen{
+    public func withoutCharacter(_ character : String) -> PwGen{
         self.characters = self.characters.filter{$0 != character.lowercased()}
         return self
     }
     
-    func withoutCharacters(_ characters : Array<String>) -> PwGen{
+    public func withoutCharacters(_ characters : Array<String>) -> PwGen{
         for character in characters{
             self.characters = self.characters.filter{$0 != character.lowercased()}
         }
         return self
     }
     
-    func addCharacter(_ character : String) -> PwGen{
+    public func addCharacter(_ character : String) -> PwGen{
         if character.count == 1{
             if !self.characters.contains(character){
                 self.characters.append(character)
@@ -108,7 +108,7 @@ class PwGen{
         return self
     }
     
-    func addCharacters(_ characters : Array<String>) -> PwGen{
+    public func addCharacters(_ characters : Array<String>) -> PwGen{
         for character in characters{
             if character.count == 1{
                 if !self.characters.contains(character){
@@ -119,19 +119,19 @@ class PwGen{
         return self
     }
     
-    func getCharacters() -> Array<String>{
+    public func getCharacters() -> Array<String>{
         return self.characters
     }
     
-    func getDefaultSymbols() -> Array<String>{
+    public func getDefaultSymbols() -> Array<String>{
         return self.symbols
     }
     
-    func getDefaultLetters() -> Array<String>{
+    public func getDefaultLetters() -> Array<String>{
         return self.letters
     }
     
-    func getDefaultNumbers() -> Array<String>{
+    public func getDefaultNumbers() -> Array<String>{
         return self.numbers
     }
 }
