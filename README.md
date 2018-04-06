@@ -32,7 +32,7 @@ Symbols, letters, numbers with added characters:
 ```swift
 let password = try! PwGen().addCharacters(["€","£"]).generate()
 ```
-Lowercase letters, numbers + symbols without the ! character:
+Lowercase letters, numbers + symbols without some characters:
 
 ```swift
 let password = try! PwGen().withoutCharacters(["!","L"," "]).withoutUppercase().generate()
