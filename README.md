@@ -8,28 +8,44 @@ Simple yet cryptographically secure password generator library in Swift.
 
 ## Usage
 
+### Import library
+
+```swift
+import PwGen
+```
+
 ### Generate password
 
-Default password (12 characters) using symbols, letters and numbers:
+Default password (12 characters) made of symbols, letters and/or numbers:
 
 ```swift
 let password: String = try! PwGen().generate()
 ```
-Password of size 20 using only letters and numbers:
+Password of size 20 that will use only letters and/or numbers:
 
 ```swift
 let password: String = try! PwGen().ofSize(20).withoutSymbols().generate()
 ```
 
-Symbols, letters, numbers and added characters:
+Symbols, letters, numbers with added characters:
 
 ```swift
-let password: String = try! PwGen().addCharacters(["€","£"]).generate()
+let password = try! PwGen().addCharacters(["€","£"]).generate()
 ```
-Lowercase letters, numbers and symbols without the ! character:
+Lowercase letters, numbers + symbols without the ! character:
 
 ```swift
-let password: String = try! PwGen().withoutCharacter("!").withoutUppercase().generate()
+let password = try! PwGen().withoutCharacters(["!","L"," "]).withoutUppercase().generate()
+```
+
+10 random passwords using the same pattern:
+
+```swift
+let generator = PwGen().withoutCharacter("a").withoutSymbols()
+for _ in 0..<10 {
+	let password = try! generator.generate()
+	print(password)
+}
 ```
 
 ### Check characters that will be used

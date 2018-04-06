@@ -7,17 +7,21 @@ public class PwGen{
         }
     }
     
-    private var useUppercase: Bool = true
+    private let defaultUppercase: Bool = true
+    private var useUppercase: Bool
     
-    private let symbols: Array<String> = ["@","#","$","%", " ", ".", "!", "\"", "&", "'", "(", ")", "*", "+", ",", "-", "/", ":", ";", "<", "=", ">", "?", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"]
+    private let defaultSize: UInt8 = 12
+    private var size: UInt8
+    
+    private let symbols: Array<String> = ["@","#","$","%", " ", ".", "!", "\"", "&", "\'", "(", ")", "*", "+", ",", "-", "/", ":", ";", "<", "=", ">", "?", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"]
     private let letters: Array<String> = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
     private let numbers: Array<String> = ["0","1","2","3","4","5","6","7","8","9"]
     
     private var characters: Array<String>
     
-    private var size: UInt8 = 12
-    
     public init(){
+        self.useUppercase = self.defaultUppercase
+        self.size = self.defaultSize
         self.characters = self.symbols + self.letters + self.numbers
     }
     
@@ -101,8 +105,8 @@ public class PwGen{
     
     public func addCharacter(_ character : String) -> PwGen{
         if character.count == 1{
-            if !self.characters.contains(character){
-                self.characters.append(character)
+            if !self.characters.contains(character.lowercased()){
+                self.characters.append(character.lowercased())
             }
         }
         return self
@@ -111,8 +115,8 @@ public class PwGen{
     public func addCharacters(_ characters : Array<String>) -> PwGen{
         for character in characters{
             if character.count == 1{
-                if !self.characters.contains(character){
-                    self.characters.append(character)
+                if !self.characters.contains(character.lowercased()){
+                    self.characters.append(character.lowercased())
                 }
             }
         }
@@ -133,5 +137,12 @@ public class PwGen{
     
     public func getDefaultNumbers() -> Array<String>{
         return self.numbers
+    }
+    
+    public func reset() -> PwGen{
+        self.useUppercase = self.defaultUppercase
+        self.size = self.defaultSize
+        self.characters = self.symbols + self.letters + self.numbers
+        return self
     }
 }
